@@ -6,8 +6,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-	if (req.query.clickedurl) {
-		res.redirect(req.query.clickedurl);
+	if (req.query.outboundUrl) {
+		res.redirect(req.query.outboundUrl);
 	} else {
 		res.status(400).send({ error: "No URL provided to redirect to" });
 	}

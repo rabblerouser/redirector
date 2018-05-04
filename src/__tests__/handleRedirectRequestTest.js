@@ -7,6 +7,7 @@ chai.use(require('sinon-chai'));
 var expect = chai.expect;
 
 describe('handleRedirectRequest', () => {
+
 	it('redirects an incoming request when an outbound URL is provided', () => {
 		const testOutboundUrl = 'http://test.com';
 		const req = { query: { outboundUrl: 'http://test.com' }};
@@ -27,5 +28,22 @@ describe('handleRedirectRequest', () => {
 		
 		expect(res.status).to.have.been.calledWith(400);
 		expect(res.send).to.have.been.calledWith({ error: "No URL provided to redirect to" });
+	});
+
+	it('publishes a link-clicked event when an outbound URL is provided', () => {
+		const testOutboundUrl = 'http://test.com';
+		const eventBody = {outboundUrl: 'http://test.com'};
+
+		const res = { redirect: sinon.stub() };
+		const req = { query: { outboundUrl: 'http://test.com' }};
+
+		let publishStub = sinon.stub(streamClient, "publish");
+		publishStub.resolves();
+
+		handleRedirectRequest(req, res);
+		
+		expect(publishStub).to.have.been.calledWith('link-clicked', eventBody);
+		
+		publishStub.restore();
 	});
 });

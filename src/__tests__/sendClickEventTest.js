@@ -18,6 +18,6 @@ describe('sendClickEvent', () => {
 			.then(() => {
 				expect(publishStub).to.have.been.calledWith('link-clicked', eventBody);
 				publishStub.restore();
-			})
+			});
 	});
 });

@@ -1,5 +1,9 @@
 const handleRedirectRequest = (req, res) => {
-	res.redirect(req.query.outboundUrl);
+	if (req.query.outboundUrl) {
+		res.redirect(req.query.outboundUrl);
+	} else {
+		res.status(400).send({ error: "No URL provided to redirect to" });
+	}
 }
 
 module.exports = handleRedirectRequest;

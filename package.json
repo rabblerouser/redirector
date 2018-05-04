@@ -1,7 +1,8 @@
 {
   "name": "redirector",
+  "version": "0.0.1",
   "description": "Rabble Rouser service that redirects URLs and sends events so that we know who's clicking on what.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "nodemon -L src/index.js",
     "start": "node src/index.js",

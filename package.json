@@ -12,7 +12,7 @@
   "author": "Rabble Rouser Team",
   "license": "AGPL-3.0",
   "dependencies": {
-    "@rabblerouser/stream-client": "^0.8.13",
+    "@rabblerouser/stream-client": "^0.8.14",
     "express": "^4.16.3"
   },
   "devDependencies": {

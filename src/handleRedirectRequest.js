@@ -10,7 +10,7 @@ const sendClickEvent = (outboundUrl) => {
 const handleRedirectRequest = (req, res) => {
 	if (req.query.outboundUrl) {
 		res.redirect(req.query.outboundUrl);
-		sendClickEvent(req.query.outboundUrl)
+		return sendClickEvent(req.query.outboundUrl)
 			.catch((e) => console.log(e));
 	} else {
 		res.status(400).send({ error: "No URL provided to redirect to" });

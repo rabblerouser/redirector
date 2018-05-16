@@ -19,7 +19,6 @@ describe('handleRedirectRequest', () => {
 	});
 
 	it('sends a 400 error if an outbound URL is not provided', () => {
-		const testOutboundUrl = 'http://test.com';
 		let res = { status: sinon.stub(), send: sinon.stub() };
 		res.status.returns(res);
 		const req = { query: {} };
@@ -31,7 +30,6 @@ describe('handleRedirectRequest', () => {
 	});
 
 	it('publishes a link-clicked event when an outbound URL is provided', () => {
-		const testOutboundUrl = 'http://test.com';
 		const eventBody = {outboundUrl: 'http://test.com'};
 
 		const res = { redirect: sinon.stub() };
@@ -45,5 +43,28 @@ describe('handleRedirectRequest', () => {
 		expect(publishStub).to.have.been.calledWith('link-clicked', eventBody);
 		
 		publishStub.restore();
+	});
+
+	it('still redirects user but logs 500 error on failure to publish event', () => {
+		const testOutboundUrl = 'http://test.com';
+		const errorDetails = { status: 500, message: 'Failed to publish event'};
+
+		const res = { redirect: sinon.stub() };
+		const req = { query: { outboundUrl: 'http://test.com' }};
+
+		let publishStub = sinon.stub(streamClient, "publish");
+		publishStub.rejects();
+
+		let logStub = sinon.stub(console, 'log');
+
+		return handleRedirectRequest(req, res)
+			.then(() => {
+				expect(res.redirect).to.have.been.calledWith(testOutboundUrl);
+				expect(console.log).to.have.been.calledWith(errorDetails);
+			})
+			.finally(() => {
+				logStub.restore();
+				publishStub.restore();
+			});
 	});
 });

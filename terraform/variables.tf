@@ -6,7 +6,7 @@ variable "region" {
 }
 
 variable "redirector_lambda_name" {
-  default = "RedirectorV4"
+  default = "redirector"
 }
 
 variable "access_key" {}

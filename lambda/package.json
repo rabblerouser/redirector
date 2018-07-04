@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Rabble Rouser service that redirects URLs and sends events so that we know who's clicking on what.",
   "scripts": {
+    "simulate": "node simulate.js",
     "test": "mocha src/__tests__/"
   },
   "repository": "git@github.com:rabblerouser/redirector.git",

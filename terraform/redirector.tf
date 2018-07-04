@@ -1,6 +1,6 @@
 data "aws_s3_bucket_object" "redirector_zip" {
-  bucket = "${var.domain}-redirector-bucket"
-  key = "redirector.zip"
+  bucket = "rabblerouser-artefacts"
+  key = "lambdas/redirector.zip"
 }
 
 resource "aws_lambda_function" "redirector" {

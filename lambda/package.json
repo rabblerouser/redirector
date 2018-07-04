@@ -2,18 +2,14 @@
   "name": "redirector",
   "version": "0.0.1",
   "description": "Rabble Rouser service that redirects URLs and sends events so that we know who's clicking on what.",
-  "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon -L src/index.js",
-    "start": "node src/index.js",
     "test": "mocha src/__tests__/"
   },
   "repository": "git@github.com:rabblerouser/redirector.git",
   "author": "Rabble Rouser Team",
   "license": "AGPL-3.0",
   "dependencies": {
-    "@rabblerouser/stream-client": "^0.8.14",
-    "express": "^4.16.3"
+    "@rabblerouser/stream-client": "^0.8.14"
   },
   "devDependencies": {
     "chai": "^4.1.2",

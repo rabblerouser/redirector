@@ -1,6 +1,6 @@
 resource "aws_api_gateway_rest_api" "redirector_api" {
-  name        = "APIGateway${var.redirector_lambda_name}"
-  description = "Yes it is."
+  name        = "${var.redirector_lambda_name}"
+  description = "API Gateway for the redirector lambda function."
 }
 
 resource "aws_api_gateway_method" "proxy_root" {
@@ -25,7 +25,7 @@ resource "aws_api_gateway_deployment" "redirector_deployment" {
     "aws_api_gateway_integration.lambda_root",
   ]
   rest_api_id = "${aws_api_gateway_rest_api.redirector_api.id}"
-  stage_name  = "test"
+  stage_name  = "${var.api_gateway_stage_name}"
 }
 
 resource "aws_lambda_permission" "lambda_api" {
@@ -51,8 +51,4 @@ resource "aws_lambda_permission" "lambda_api_method" {
   function_name = "${aws_lambda_function.redirector.function_name}"
   principal = "apigateway.amazonaws.com"
   source_arn = "arn:aws:execute-api:${var.region}:${data.aws_caller_identity.current.account_id}:${aws_api_gateway_rest_api.redirector_api.id}/*/*"
-}
-
-output "base_url" {
-  value = "${aws_api_gateway_deployment.redirector_deployment.invoke_url}"
 }

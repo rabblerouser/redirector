@@ -1,7 +1,7 @@
 {
   "name": "redirector",
   "version": "0.0.1",
-  "description": "Rabble Rouser service that redirects URLs and sends events so that we know who's clicking on what.",
+  "description": "A Lambda function that receives an outboundUrl, puts event on the kinesis stream and redirects.",
   "scripts": {
     "simulate": "node simulate.js",
     "test": "mocha src/__tests__/"

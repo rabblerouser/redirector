@@ -11,6 +11,3 @@ variable "redirector_lambda_name" {
 }
 
 variable "api_gateway_stage_name" {}
-
-variable "access_key" {}
-variable "secret_key" {}
